@@ -1,9 +1,12 @@
 package com.github.sergkukuev.anykeeper
 
+import android.R // TODO: don't use this
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.sergkukuev.anykeeper.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         configureRecyclerView()
         configureButtons()
+        configureSwipes()
     }
 
     private fun configureRecyclerView() = with(binding) {
@@ -40,5 +44,23 @@ class MainActivity : AppCompatActivity() {
             val reminder = Reminder(text, timestamp)
             adapter.addReminder(reminder)
         }
+    }
+
+    private fun configureSwipes() = with(binding) {
+        val swipeGesture = object : SwipeGesture() {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                when (direction) {
+                    ItemTouchHelper.LEFT -> {
+                        adapter.removeReminder(viewHolder.adapterPosition)
+                    }
+                }
+            }
+        }
+
+        swipeGesture.addSwipeLeftBackgroundColor(R.color.white)
+        swipeGesture.addSwipeLeftActionIcon(R.drawable.ic_menu_delete)
+
+        val touchHelper = ItemTouchHelper(swipeGesture)
+        touchHelper.attachToRecyclerView(rvReminders)
     }
 }
