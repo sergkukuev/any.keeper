@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">any.keeper</string>
+    <string name="app_name">Any Keeper</string>
+    <string name="add_reminder">Добавить напоминание</string>
 </resources>
