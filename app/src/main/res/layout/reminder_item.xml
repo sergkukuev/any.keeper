@@ -1,32 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
+        <FrameLayout
+            android:id="@+id/status_layout"
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/teal_200" />
+
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingVertical="5dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="2dp">
 
             <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:id="@+id/title_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Мое напоминание"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
 
-            <TextView
-                android:id="@+id/tvTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/creation_view"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableStart="@android:drawable/ic_lock_idle_alarm"
+                    android:drawablePadding="5dp"
+                    android:text="01.01.22"
+                    android:textAlignment="viewStart"
+                    android:textSize="12sp"
+                    tools:ignore="HardcodedText,UseCompatTextViewDrawableXml" />
+
+                <TextView
+                    android:id="@+id/expiration_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:drawableStart="@android:drawable/ic_lock_idle_alarm"
+                    android:drawablePadding="5dp"
+                    android:text="меньше дня"
+                    android:textAlignment="viewEnd"
+                    android:textIsSelectable="false"
+                    android:textSize="12sp"
+                    tools:ignore="HardcodedText,UseCompatTextViewDrawableXml" />
+            </LinearLayout>
 
         </LinearLayout>
 

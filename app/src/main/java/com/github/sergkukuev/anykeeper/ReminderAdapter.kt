@@ -13,14 +13,19 @@ class ReminderAdapter : RecyclerView.Adapter<ReminderAdapter.ViewHolder>() {
     class ViewHolder(item: View) : RecyclerView.ViewHolder(item) {
         private val binding = ReminderItemBinding.bind(item)
         fun bind(note: Reminder) = with(binding) {
-            tvTime.text = note.expire.toString()
-            tvTitle.text = note.title
+            expirationView.text = note.expire.toString()
+            titleView.text = note.title
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        return ViewHolder(inflater.inflate(R.layout.reminder_item, parent, false))
+        return ViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.reminder_item,
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
