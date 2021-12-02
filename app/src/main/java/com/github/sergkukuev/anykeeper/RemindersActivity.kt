@@ -7,17 +7,17 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.sergkukuev.anykeeper.databinding.ActivityMainBinding
+import com.github.sergkukuev.anykeeper.databinding.RemindersActivityBinding
 import java.time.LocalDateTime
 import kotlin.random.Random
 
-class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
+class RemindersActivity : AppCompatActivity() {
+    lateinit var binding: RemindersActivityBinding
     private val adapter = ReminderAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = RemindersActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         configureRecyclerView()
@@ -27,11 +27,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun configureRecyclerView() = with(binding) {
         rvReminders.apply {
-            adapter = this@MainActivity.adapter
-            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = this@RemindersActivity.adapter
+            layoutManager = LinearLayoutManager(this@RemindersActivity)
             addItemDecoration(
                 DividerItemDecoration(
-                    this@MainActivity,
+                    this@RemindersActivity,
                     DividerItemDecoration.VERTICAL
                 )
             )

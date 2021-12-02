@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Anykeeper">
         <activity
-            android:name=".MainActivity"
+            android:name=".RemindersActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
