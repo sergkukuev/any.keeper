@@ -1,6 +1,6 @@
 package com.github.sergkukuev.anykeeper
 
-import android.R // TODO: don't use this
+import android.R
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.sergkukuev.anykeeper.databinding.ActivityMainBinding
+import java.time.LocalDateTime
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -40,8 +42,9 @@ class MainActivity : AppCompatActivity() {
     private fun configureButtons() = with(binding) {
         btnNewReminder.setOnClickListener {
             val text = "Напоминание №${id++}"
-            val timestamp = System.currentTimeMillis() / 1000L
-            val reminder = Reminder(text, timestamp)
+            val timestamp = LocalDateTime.now().toEpochMilli()
+            val lifetime = Random.nextLong(864000000) // 10 days
+            val reminder = Reminder(text, lifetime, timestamp)
             adapter.addReminder(reminder)
         }
     }

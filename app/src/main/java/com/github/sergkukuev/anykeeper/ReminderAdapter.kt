@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.sergkukuev.anykeeper.databinding.ReminderItemBinding
+import java.time.LocalDateTime
 
 class ReminderAdapter : RecyclerView.Adapter<ReminderAdapter.ViewHolder>() {
     private val reminders = ArrayList<Reminder>()
@@ -13,8 +14,26 @@ class ReminderAdapter : RecyclerView.Adapter<ReminderAdapter.ViewHolder>() {
     class ViewHolder(item: View) : RecyclerView.ViewHolder(item) {
         private val binding = ReminderItemBinding.bind(item)
         fun bind(note: Reminder) = with(binding) {
-            expirationView.text = note.expire.toString()
+            val expiration = note.timestamp + note.lifetime
+            expirationView.text = asExpirationDate(expiration)
+            creationView.text = asCreationDate(note.timestamp)
             titleView.text = note.title
+        }
+
+        private fun asCreationDate(posix: Long): String {
+            return posix.toLocalDateTime().asString("dd.MM.yy")
+        }
+
+        private fun asExpirationDate(posix: Long): String {
+            val days = posix.toLocalDateTime().diffOfDays(LocalDateTime.now())
+            val result = when {
+                days > 366 -> "> year"
+                days > 31 -> "> month"
+                days > 0 -> "$days days"
+                days.compareTo(0) == 0 -> "< day"
+                else -> "expired"
+            }
+            return result
         }
     }
 
